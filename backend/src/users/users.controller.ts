@@ -47,6 +47,7 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get user by ID' })
   findOne(@Param('id', ParseIntPipe) id: number) {
+    console.log(id);
     return from(this.usersService.findOne(id)).pipe(
       map((user: User) => new UserEntity(user)),
     );

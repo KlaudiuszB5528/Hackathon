@@ -20,8 +20,8 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('Team4 API')
-    .setDescription('This is a API of Team4 project')
+    .setTitle('Hackaton Piękne Umysły API')
+    .setDescription('This is a API of Piękne Umysły project')
     .setVersion('1')
     .addBearerAuth()
     .build();

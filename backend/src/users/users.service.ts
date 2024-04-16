@@ -21,11 +21,8 @@ export class UsersService {
     });
   }
 
-  findAll() {
-    return this.prismaService.user.findMany();
-  }
-
   findOne(id: number) {
+    console.log(id);
     return this.prismaService.user.findUnique({ where: { id } });
   }
 
