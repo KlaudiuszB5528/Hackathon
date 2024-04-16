@@ -2,23 +2,18 @@ import { login } from '@/app/signin/sign-in-form.helper';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-export const formSchema = z
-  .object({
-    name: z.string().min(1, { message: 'Provide User name' }),
-    password: z
-      .string()
-      .min(6, { message: 'Provide password (min 6 characters)' }),
-    confirmPassword: z.string().min(1, { message: 'Confirm password' }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
-  });
+export const formSchema = z.object({
+  city: z.string().min(1, { message: 'Provide city' }),
+  theme: z.string().min(1, { message: 'Provide theme' }),
+  participants: z
+    .number()
+    .int()
+    .positive({ message: 'Provide number of participants' }),
+});
 
-export type SignUpCredentials = z.infer<typeof formSchema>;
+export type CreateGameFormValues = z.infer<typeof formSchema>;
 
 export const signup = async (name: string, password: string) => {
-  console.log('signup');
   try {
     const res = await fetch('http://localhost:8000/users', {
       method: 'POST',
