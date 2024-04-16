@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import hero from '../public/landing.svg'
-import Link from 'next/link'
+import Image from 'next/image';
+import hero from '../public/landing.svg';
+import Link from 'next/link';
 
 export default async function Home() {
   return (
@@ -11,7 +11,8 @@ export default async function Home() {
             Your hub for field games
           </h1>
           <p className="text-sm pt-8 pb-6 lg:text-base">
-            Join hundreds of participants who use our platform and get new ideas for your new field game
+            Join hundreds of participants who use our platform and get new ideas
+            for your new field game
           </p>
         </div>
         <div className="flex flex-row gap-3 md:gap-5">

@@ -62,7 +62,7 @@ export default function SignInForm() {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Team name</FormLabel>
+                      <FormLabel>User name</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
