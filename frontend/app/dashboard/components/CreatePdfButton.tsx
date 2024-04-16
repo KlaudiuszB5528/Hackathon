@@ -11,6 +11,7 @@ type Props = {
   theme: string;
   participants: number;
   description: string;
+  points: number;
 };
 
 function removePolishCharacters(str: string | null): string {
@@ -41,7 +42,7 @@ function removePolishCharacters(str: string | null): string {
   );
 }
 
-const CreatePdfButton = ({ city, theme, participants, description }: Props) => {
+const CreatePdfButton = ({ city, theme, participants, points }: Props) => {
   const { loading, setLoading } = useContext(AuthContext) as IAuthContext;
 
   const createPdf = async () => {
@@ -58,7 +59,7 @@ const CreatePdfButton = ({ city, theme, participants, description }: Props) => {
       }
     };
 
-    const newGame = await generateGame({ city, participants });
+    const newGame = await generateGame({ city, participants, points, theme });
     if (!newGame.choices[0].message.content) {
       setLoading(false);
       return;
