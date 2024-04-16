@@ -109,13 +109,22 @@ export const createPdf = async ({
     incrementCursorY(10);
   }
   gameDetails.points.forEach(
-    (point: { name: string; coordinates: string; puzzles: string[] }) => {
+    (point: {
+      name: string;
+      coordinates: string;
+      puzzles: string[];
+      requiredProps: string[];
+    }) => {
       doc.setFont('Helvetica', 'bold');
       doc.text(`${point.name} ${point.coordinates}`, 10, cursorY);
       incrementCursorY(10);
       doc.setFont('Helvetica', 'normal');
       point.puzzles.forEach((puzzle: string) => {
         doc.text(`Puzzle: ${puzzle}`, 10, cursorY);
+        incrementCursorY(10);
+      });
+      point.requiredProps.forEach((prop: string) => {
+        doc.text(`Required: ${prop}`, 10, cursorY);
         incrementCursorY(10);
       });
     },
