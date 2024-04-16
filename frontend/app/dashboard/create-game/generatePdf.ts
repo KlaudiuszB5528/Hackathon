@@ -107,7 +107,7 @@ export const createPdf = async (content: string) => {
         incrementCursorY(10);
       });
       point.requiredProps.forEach((prop: string) => {
-        doc.text(`Required prop: ${prop}`, 10, cursorY);
+        doc.text(`Required: ${prop}`, 10, cursorY);
         incrementCursorY(10);
       });
     },
