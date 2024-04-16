@@ -55,6 +55,19 @@ export class GamesController {
     return this.gamesService.findAllForGameMaster(id);
   }
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  @Roles([Role.USER])
+  @ApiOkResponse({
+    type: [GameEntity],
+    description: 'Get all games',
+  })
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get all games' })
+  findAllForUser() {
+    return this.gamesService.findAllForUser();
+  }
+
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   @Roles([Role.MASTER_USER])

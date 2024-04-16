@@ -44,4 +44,8 @@ export class GamesService {
       },
     });
   }
+
+  findAllForUser() {
+    return this.prismaService.game.findMany();
+  }
 }
