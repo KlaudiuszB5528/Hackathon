@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, Max } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateGameDto {
@@ -7,6 +7,7 @@ export class CreateGameDto {
   @ApiProperty()
   title: string;
   @IsNumber()
+  @Max(16)
   @IsNotEmpty()
   @ApiProperty()
   slots: number;
