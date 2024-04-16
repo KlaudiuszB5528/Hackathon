@@ -1,6 +1,5 @@
 'use client';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Button } from '@components/ui/button';
 import {
   Form,
   FormControl,
@@ -10,11 +9,11 @@ import {
   FormMessage,
 } from '@components/ui/form';
 
-import { generateGame } from '@/open-ai/ai';
 import { Input } from '@components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import CreatePdfButton from '../components/CreatePdfButton';
 import ThemeSelect from './ThemeSelect';
 import {
   formSchema,
@@ -33,18 +32,7 @@ export default function SignUpForm() {
   });
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(async () => {
-          const res = await generateGame({
-            city: form.getValues('city'),
-            participants: form.getValues('participants'),
-            points: form.getValues('points'),
-            theme: form.getValues('theme'),
-          });
-          console.log(res);
-        })}
-        className="w-full"
-      >
+      <form onSubmit={form.handleSubmit(() => {})} className="w-full">
         <ScrollArea className="h-screen">
           <div className="flex items-center h-full justify-center py-12 ">
             <div className="mx-auto grid w-[350px] gap-6">
@@ -116,12 +104,12 @@ export default function SignUpForm() {
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <Button
-                    type="submit"
-                    className="my-6 bg-fuchsia-700 hover:bg-fuchsia-800"
-                  >
-                    Create Game
-                  </Button>
+                  <CreatePdfButton
+                    city={form.getValues('city')}
+                    theme={form.getValues('theme')}
+                    participants={form.getValues('participants')}
+                    points={form.getValues('points')}
+                  />
                 </div>
               </div>
             </div>

@@ -1,16 +1,14 @@
-import { Button } from '@/components/ui/button';
-import React, { useContext, useState } from 'react';
-import { jsPDF } from 'jspdf';
-import { generateGame } from '@/open-ai/ai';
-import { AuthContext } from '@/app/context/AuthContext';
 import { IAuthContext } from '@/app/Interfaces/IAuthContext';
-import { set } from 'zod';
+import { AuthContext } from '@/app/context/AuthContext';
+import { Button } from '@/components/ui/button';
+import { generateGame } from '@/open-ai/ai';
+import { jsPDF } from 'jspdf';
+import { useContext } from 'react';
 
 type Props = {
   city: string;
   theme: string;
   participants: number;
-  description: string;
   points: number;
 };
 
