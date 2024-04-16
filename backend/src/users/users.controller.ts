@@ -44,13 +44,27 @@ export class UsersController {
     );
   }
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  @Roles([Role.ADMIN])
+  @ApiOkResponse({
+    type: [UserEntity],
+    description: 'Get all users which are not admin',
+  })
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get all users are not admin' })
+  findAllUser() {
+    return from(this.usersService.findAllUsers()).pipe(
+      map((user: User[]) => user.map((u) => new UserEntity(u))),
+    );
+  }
+
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   @ApiOkResponse({ type: UserEntity, description: 'Get a user by ID' })
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get user by ID' })
   findOne(@Param('id', ParseIntPipe) id: number) {
-    console.log(id);
     return from(this.usersService.findOne(id)).pipe(
       map((user: User) => new UserEntity(user)),
     );

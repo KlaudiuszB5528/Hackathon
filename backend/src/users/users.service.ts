@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UpdateUserRoleDto } from './dto/update-user-role.dto';
+import { Role } from './enums/roles';
 
 export const roundsOfHashing = 10;
 
@@ -50,6 +51,12 @@ export class UsersService {
     return this.prismaService.user.update({
       where: { id },
       data: { role: updateUserRoleDto.role },
+    });
+  }
+
+  findAllUsers() {
+    return this.prismaService.user.findMany({
+      where: { NOT: { role: Role.ADMIN } },
     });
   }
 }
