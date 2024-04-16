@@ -28,7 +28,7 @@ function removePolishCharacters(str: string | null): string {
   );
 }
 
-export const createPdf = async (content: string) => {
+export const createPdf = async (content: string, gameRules: string) => {
   let cursorY = 0;
   const pageMarginY = 280;
 
@@ -72,12 +72,12 @@ export const createPdf = async (content: string) => {
   doc.setFontSize(12);
   doc.setFont('Helvetica', 'normal');
   incrementCursorY(10);
-  doc.text(removePolishCharacters(gameDetails.gameRules), 10, cursorY, {
+  doc.text(removePolishCharacters(gameRules), 10, cursorY, {
     maxWidth: 180,
   });
 
   incrementCursorY(
-    doc.getTextDimensions(removePolishCharacters(gameDetails.gameRules), {
+    doc.getTextDimensions(removePolishCharacters(gameRules), {
       maxWidth: 180,
     }).h + 10,
   );

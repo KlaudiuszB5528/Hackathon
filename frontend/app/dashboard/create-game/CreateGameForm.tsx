@@ -13,17 +13,21 @@ import {
 import { Input } from '@components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { Textarea } from '@/components/ui/textarea';
 import ThemeSelect from './ThemeSelect';
 import {
   formSchema,
   type CreateGameFormValues,
 } from './create-game-form.helper';
 import { createPdf } from './generatePdf';
+
 export default function CreateGameForm() {
   const [gameDetails, setGameDetails] = useState<string | null>(null);
+  const [jsonGameDetails, setJsonGameDetails] = useState<any>(null);
+  const [gameRules, setGameRules] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<CreateGameFormValues>({
     resolver: zodResolver(formSchema),
@@ -34,6 +38,13 @@ export default function CreateGameForm() {
       points: '4',
     },
   });
+
+  useEffect(() => {
+    if (gameDetails === null) return;
+    setJsonGameDetails(JSON.parse(gameDetails));
+    setGameRules(JSON.parse(gameDetails).gameRules);
+  }, [gameDetails]);
+  console.log(gameDetails);
   return (
     <Form {...form}>
       <form
@@ -128,6 +139,23 @@ export default function CreateGameForm() {
                     )}
                   />
                 </div>
+                <div className="grid gap-2">
+                  <FormLabel
+                    className={`${
+                      gameRules === ''
+                        ? 'text-muted-foreground'
+                        : 'text-primary-foreground'
+                    }`}
+                  >
+                    Edit game rules
+                  </FormLabel>
+                  <Textarea
+                    disabled={gameRules === ''}
+                    value={gameRules}
+                    onChange={(e) => setGameRules(e.target.value)}
+                    placeholder="You can edit game rules after generating the game"
+                  />
+                </div>
                 <div className="flex items-center justify-between">
                   <Button className="bg-fuchsia-700 hover:bg-fuchsia-800 w-32">
                     {isLoading ? (
@@ -140,7 +168,7 @@ export default function CreateGameForm() {
                     type="button"
                     onClick={() => {
                       if (gameDetails === null) return;
-                      createPdf(gameDetails);
+                      createPdf(gameDetails, gameRules);
                     }}
                   >
                     Save to PDF
