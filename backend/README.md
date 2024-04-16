@@ -7,3 +7,8 @@ npx prisma db seed
 ```bash
 npx prisma migrate dev
 ```
+
+## Reset db
+```bash
+npx prisma migrate reset
+```

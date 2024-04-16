@@ -12,4 +12,26 @@ model User {
   username String @unique
   password String
   role     String @default("user")
+  game     Game[]
+}
+
+model Game {
+  id          Int    @id @default(autoincrement())
+  authorId    Int
+  author      User   @relation(fields: [authorId], references: [id])
+  city        String
+  description String
+  title       String
+  slots       Int
+  files       File[]
+}
+
+model File {
+  id        Int      @id @default(autoincrement())
+  name      String
+  filename  String
+  size      Int
+  createdAt DateTime @default(now())
+  game      Game     @relation(fields: [gameId], references: [id])
+  gameId    Int
 }

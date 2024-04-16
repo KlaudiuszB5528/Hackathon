@@ -13,6 +13,14 @@ async function main() {
       role: Role.ADMIN,
     },
   });
+
+  await prisma.user.create({
+    data: {
+      username: 'master',
+      password: password,
+      role: Role.MASTER_USER,
+    },
+  });
 }
 
 main()
