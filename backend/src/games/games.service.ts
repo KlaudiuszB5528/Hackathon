@@ -33,11 +33,7 @@ export class GamesService {
     });
   }
 
-  async remove(id: number) {
-    await this.prismaService.file.deleteMany({
-      where: { gameId: id },
-    });
-
+  remove(id: number) {
     return this.prismaService.game.delete({
       where: {
         id,

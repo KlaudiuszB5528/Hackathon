@@ -23,15 +23,4 @@ model Game {
   description String
   title       String
   slots       Int
-  files       File[]
-}
-
-model File {
-  id        Int      @id @default(autoincrement())
-  name      String
-  filename  String
-  size      Int
-  createdAt DateTime @default(now())
-  game      Game     @relation(fields: [gameId], references: [id])
-  gameId    Int
 }
