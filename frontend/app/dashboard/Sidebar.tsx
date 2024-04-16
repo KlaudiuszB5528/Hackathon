@@ -3,19 +3,11 @@
 import React from 'react';
 import Logo from '@/public/Logo.svg';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { deleteCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
 
 import Link from 'next/link';
-import {
-  LogOut,
-  Home,
-  Package,
-  Settings,
-  Users2,
-  ListChecks,
-} from 'lucide-react';
+import { Home, LogOut, Plus, Settings } from 'lucide-react';
 
 import {
   Tooltip,
@@ -56,6 +48,21 @@ const Sidebar = () => {
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Dashboard</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/dashboard/create-game"
+                className={`${
+                  pathname == '/dashboard/create-game' &&
+                  'bg-accent text-primary'
+                } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
+              >
+                <Plus className="h-5 w-5" />
+                <span className="sr-only">Create game</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Create game</TooltipContent>
           </Tooltip>
 
           <Tooltip>
