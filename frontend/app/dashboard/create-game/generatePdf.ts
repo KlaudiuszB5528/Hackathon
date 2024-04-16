@@ -43,14 +43,14 @@ export const createPdf = async ({
   points,
 }: Props) => {
   let cursorY = 0;
-  const pageMarginY = 200;
+  const pageMarginY = 280;
 
   const incrementCursorY = (increment: number) => {
     cursorY += increment;
     console.log(cursorY);
     if (cursorY >= pageMarginY) {
       doc.addPage();
-      cursorY = 10;
+      cursorY = 25;
     }
   };
 
@@ -78,7 +78,7 @@ export const createPdf = async ({
   doc.text('Game Details:', 10, cursorY);
   doc.setFontSize(14);
   incrementCursorY(10);
-  doc.text(`City: ${city}`, 10, cursorY);
+  doc.text(`City: ${removePolishCharacters(city)}`, 10, cursorY);
   incrementCursorY(10);
   doc.text(`Game Theme: ${theme}`, 10, cursorY);
   incrementCursorY(10);
@@ -109,10 +109,18 @@ export const createPdf = async ({
     doc.text('No points to display', 10, cursorY);
     incrementCursorY(10);
   }
-  gameDetails.points.forEach((point: { name: string; coordinates: string }) => {
-    doc.text(`${point.name} ${point.coordinates}`, 10, cursorY);
-    incrementCursorY(10);
-  });
+  gameDetails.points.forEach(
+    (point: { name: string; coordinates: string; puzzles: string[] }) => {
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${point.name} ${point.coordinates}`, 10, cursorY);
+      incrementCursorY(10);
+      doc.setFont('Helvetica', 'normal');
+      point.puzzles.forEach((puzzle: string) => {
+        doc.text(`Puzzle: ${puzzle}`, 10, cursorY);
+        incrementCursorY(10);
+      });
+    },
+  );
 
   doc.save('a4.pdf');
 };

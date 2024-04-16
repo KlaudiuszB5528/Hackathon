@@ -2,7 +2,6 @@
 import { useContext } from 'react';
 import { IAuthContext } from '../Interfaces/IAuthContext';
 import { AuthContext } from '../context/AuthContext';
-import CreatePdfButton from './components/CreatePdfButton';
 
 const Dashboard = () => {
   const { userData, userId } = useContext(AuthContext) as IAuthContext;
