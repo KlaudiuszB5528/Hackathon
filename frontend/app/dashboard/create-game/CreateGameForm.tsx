@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from '@components/ui/form';
 
+import { generateGame } from '@/open-ai/ai';
 import { Input } from '@components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -27,13 +28,20 @@ export default function SignUpForm() {
       city: '',
       participants: 2,
       theme: '',
+      points: 4,
     },
   });
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(() => {
-          console.log(form.getValues());
+        onSubmit={form.handleSubmit(async () => {
+          const res = await generateGame({
+            city: form.getValues('city'),
+            participants: form.getValues('participants'),
+            points: form.getValues('points'),
+            theme: form.getValues('theme'),
+          });
+          console.log(res);
         })}
         className="w-full"
       >
@@ -92,7 +100,21 @@ export default function SignUpForm() {
                     )}
                   />
                 </div>
-
+                <div className="grid gap-2">
+                  <FormField
+                    control={form.control}
+                    name="points"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Number of control points</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <div className="flex items-center justify-between">
                   <Button
                     type="submit"

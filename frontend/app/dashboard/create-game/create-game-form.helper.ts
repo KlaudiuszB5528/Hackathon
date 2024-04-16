@@ -5,6 +5,7 @@ import { z } from 'zod';
 export const formSchema = z.object({
   city: z.string().min(1, { message: 'Provide city' }),
   theme: z.string().min(1, { message: 'Provide theme' }),
+  points: z.number().int().positive({ message: 'Provide number of points' }),
   participants: z
     .number()
     .int()
