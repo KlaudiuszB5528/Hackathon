@@ -23,4 +23,7 @@ export class GameEntity implements Game {
 
   @ApiProperty()
   title: string;
+
+  @ApiProperty()
+  promptResponse: string;
 }

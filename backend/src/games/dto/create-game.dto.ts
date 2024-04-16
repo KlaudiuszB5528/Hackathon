@@ -23,4 +23,5 @@ export class CreateGameDto {
   @IsNotEmpty()
   @ApiProperty()
   authorId: number;
+  // TODO add promptResponse
 }
