@@ -1,6 +1,5 @@
 'use client';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Button } from '@components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,6 +13,7 @@ import { Input } from '@components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import CreatePdfButton from '../components/CreatePdfButton';
 import ThemeSelect from './ThemeSelect';
 import {
   formSchema,
@@ -27,16 +27,12 @@ export default function SignUpForm() {
       city: '',
       participants: 2,
       theme: '',
+      points: 4,
     },
   });
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(() => {
-          console.log(form.getValues());
-        })}
-        className="w-full"
-      >
+      <form onSubmit={form.handleSubmit(() => {})} className="w-full">
         <ScrollArea className="h-screen">
           <div className="flex items-center h-full justify-center py-12 ">
             <div className="mx-auto grid w-[350px] gap-6">
@@ -92,14 +88,28 @@ export default function SignUpForm() {
                     )}
                   />
                 </div>
-
+                <div className="grid gap-2">
+                  <FormField
+                    control={form.control}
+                    name="points"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Number of control points</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="number" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <div className="flex items-center justify-between">
-                  <Button
-                    type="submit"
-                    className="my-6 bg-fuchsia-700 hover:bg-fuchsia-800"
-                  >
-                    Create Game
-                  </Button>
+                  <CreatePdfButton
+                    city={form.getValues('city')}
+                    theme={form.getValues('theme')}
+                    participants={form.getValues('participants')}
+                    points={form.getValues('points')}
+                  />
                 </div>
               </div>
             </div>
