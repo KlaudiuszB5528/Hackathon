@@ -1,4 +1,5 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Form,
@@ -8,31 +9,43 @@ import {
   FormLabel,
   FormMessage,
 } from '@components/ui/form';
-
 import { Input } from '@components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
+import { Loader } from 'lucide-react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import CreatePdfButton from '../components/CreatePdfButton';
 import ThemeSelect from './ThemeSelect';
 import {
   formSchema,
   type CreateGameFormValues,
 } from './create-game-form.helper';
-export default function SignUpForm() {
-  const router = useRouter();
+import { createPdf } from './generatePdf';
+export default function CreateGameForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<CreateGameFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       city: '',
-      participants: 2,
+      participants: '2',
       theme: '',
-      points: 4,
+      points: '4',
     },
   });
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(() => {})} className="w-full">
+      <form
+        onSubmit={form.handleSubmit(() => {
+          setIsLoading(true);
+          createPdf({
+            city: form.getValues().city,
+            participants: form.getValues().participants,
+            points: form.getValues().points,
+            theme: form.getValues().theme,
+          });
+          setIsLoading(false);
+        })}
+        className="w-full"
+      >
         <ScrollArea className="h-screen">
           <div className="flex items-center h-full justify-center py-12 ">
             <div className="mx-auto grid w-[350px] gap-6">
@@ -104,12 +117,13 @@ export default function SignUpForm() {
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <CreatePdfButton
-                    city={form.getValues('city')}
-                    theme={form.getValues('theme')}
-                    participants={form.getValues('participants')}
-                    points={form.getValues('points')}
-                  />
+                  <Button className="bg-fuchsia-700 hover:bg-fuchsia-800">
+                    {isLoading ? (
+                      <Loader className="animate-spin" />
+                    ) : (
+                      'Create PDF'
+                    )}
+                  </Button>
                 </div>
               </div>
             </div>

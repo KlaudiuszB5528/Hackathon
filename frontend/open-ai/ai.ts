@@ -7,8 +7,8 @@ const openai = new OpenAI({
 
 export interface Game {
   city: string;
-  participants: number;
-  points: number;
+  participants: string;
+  points: string;
   theme: string;
 }
 

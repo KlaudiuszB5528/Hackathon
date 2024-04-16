@@ -4,8 +4,8 @@ import { jsPDF } from 'jspdf';
 type Props = {
   city: string;
   theme: string;
-  participants: number;
-  points: number;
+  participants: string;
+  points: string;
 };
 
 function removePolishCharacters(str: string | null): string {
@@ -36,7 +36,12 @@ function removePolishCharacters(str: string | null): string {
   );
 }
 
-const createPdf = async ({ city, theme, participants, points }: Props) => {
+export const createPdf = async ({
+  city,
+  theme,
+  participants,
+  points,
+}: Props) => {
   let cursorY = 0;
   const pageMarginY = 200;
 
