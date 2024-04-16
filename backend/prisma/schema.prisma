@@ -24,4 +24,5 @@ model Game {
   title          String
   slots          Int
   promptResponse String
+  theme          String
 }

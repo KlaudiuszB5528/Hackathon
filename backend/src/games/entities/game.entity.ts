@@ -26,4 +26,7 @@ export class GameEntity implements Game {
 
   @ApiProperty()
   promptResponse: string;
+
+  @ApiProperty()
+  theme: string;
 }

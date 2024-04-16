@@ -42,6 +42,8 @@ export class UsersService {
   }
 
   async remove(id: number) {
+    await this.prismaService.game.deleteMany({ where: { authorId: id } });
+
     return this.prismaService.user.delete({
       where: { id },
     });

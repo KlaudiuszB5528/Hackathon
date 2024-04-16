@@ -12,10 +12,6 @@ export class GamesService {
     });
   }
 
-  findAll() {
-    return `This action returns all games`;
-  }
-
   findOne(id: number) {
     return this.prismaService.game.findUnique({
       where: {
