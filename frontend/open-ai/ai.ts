@@ -28,6 +28,7 @@ export async function generateGame({
         "name": "...",
         "coordinates": "...",
         "puzzles": ["...", "...", "..."],
+        "requiredProps": ["...", "..."]
     }],
     theme: "...",
     "participants": 8,
