@@ -21,6 +21,26 @@ async function main() {
       role: Role.MASTER_USER,
     },
   });
+
+  await prisma.user.create({
+    data: {
+      username: 'user',
+      password: password,
+      role: Role.USER,
+    },
+  });
+
+  await prisma.game.create({
+    data: {
+      title: 'Game 1',
+      authorId: 2,
+      description: 'Description of Game 1',
+      city: 'City 1',
+      slots: 5,
+      promptResponse: 'Prompt Response 1',
+      theme: 'Theme 1',
+    },
+  });
 }
 
 main()
