@@ -33,7 +33,7 @@ describe('AuthController', () => {
   });
 
   it('should login successfully with valid credentials', async () => {
-    const loginDto: LoginAuthDto = { name: 'test', password: 'test' };
+    const loginDto: LoginAuthDto = { username: 'test', password: 'test' };
     const result = { accessToken: 'testToken' };
 
     jest.spyOn(service, 'login').mockImplementation(async () => result);
@@ -42,7 +42,7 @@ describe('AuthController', () => {
   });
 
   it('should throw an error with invalid credentials', async () => {
-    const loginDto: LoginAuthDto = { name: 'test', password: 'wrong' };
+    const loginDto: LoginAuthDto = { username: 'test', password: 'wrong' };
 
     jest.spyOn(service, 'login').mockImplementation(async () => {
       throw new Error('Invalid credentials');

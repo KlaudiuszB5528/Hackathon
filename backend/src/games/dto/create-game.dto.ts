@@ -23,5 +23,12 @@ export class CreateGameDto {
   @IsNotEmpty()
   @ApiProperty()
   authorId: number;
-  // TODO add promptResponse
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  promptResponse: string;
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  theme: string;
 }
