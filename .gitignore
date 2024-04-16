@@ -34,3 +34,4 @@ Thumbs.db
 # General
 log/
 *.log
+frontend/package-lock.json

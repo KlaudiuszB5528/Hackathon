@@ -6,8 +6,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Hackathonify',
-  description: 'Your hub for hackathon applications',
+  title: 'Field Game Zone',
+  description: 'Your Zone for Field Games',
 };
 
 export default function RootLayout({
