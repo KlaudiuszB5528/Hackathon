@@ -12,57 +12,50 @@ import {
 
 import { Input } from '@components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import signUpImg from 'public/signup.svg';
 import { useForm } from 'react-hook-form';
+import ThemeSelect from './ThemeSelect';
 import {
   formSchema,
-  signup,
-  type SignUpCredentials,
+  type CreateGameFormValues,
 } from './create-game-form.helper';
 export default function SignUpForm() {
   const router = useRouter();
-  const form = useForm<SignUpCredentials>({
+  const form = useForm<CreateGameFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      password: '',
-      confirmPassword: '',
+      city: '',
+      participants: 2,
+      theme: '',
     },
   });
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(async () => {
-          const res = await signup(
-            form.getValues('name'),
-            form.getValues('password'),
-          );
-
-          if (res) router.push('/dashboard');
+        onSubmit={form.handleSubmit(() => {
+          console.log(form.getValues());
         })}
-        className="w-full lg:grid lg:grid-cols-2"
+        className="w-full"
       >
         <ScrollArea className="h-screen">
           <div className="flex items-center h-full justify-center py-12 ">
             <div className="mx-auto grid w-[350px] gap-6">
               <div className="grid gap-2 text-center">
-                <h1 className="text-3xl font-bold">Sign Up</h1>
+                <h1 className="text-3xl font-bold">Create New Game</h1>
                 <p className="text-balance text-muted-foreground">
-                  You need to sign up to access the platform
+                  Fill the form to create a new game
                 </p>
               </div>
               <div className="grid gap-4">
                 <div className="grid gap-2">
                   <FormField
                     control={form.control}
-                    name="name"
+                    name="city"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>User name</FormLabel>
+                        <FormLabel>City</FormLabel>
                         <FormControl>
-                          <Input placeholder="eg. Andrew Kowalski" {...field} />
+                          <Input placeholder="eg. Kielce" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -72,12 +65,12 @@ export default function SignUpForm() {
                 <div className="grid gap-2">
                   <FormField
                     control={form.control}
-                    name="password"
+                    name="theme"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>Theme</FormLabel>
                         <FormControl>
-                          <Input {...field} type="password" />
+                          <ThemeSelect />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -87,12 +80,12 @@ export default function SignUpForm() {
                 <div className="grid gap-2">
                   <FormField
                     control={form.control}
-                    name="confirmPassword"
+                    name="participants"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Confirm password</FormLabel>
+                        <FormLabel>Participants</FormLabel>
                         <FormControl>
-                          <Input {...field} type="password" />
+                          <Input {...field} type="number" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -105,22 +98,13 @@ export default function SignUpForm() {
                     type="submit"
                     className="my-6 bg-fuchsia-700 hover:bg-fuchsia-800"
                   >
-                    Add new user
+                    Create Game
                   </Button>
                 </div>
               </div>
             </div>
           </div>
         </ScrollArea>
-        <div className="hidden bg-muted lg:block h-screen">
-          <Image
-            src={signUpImg}
-            alt="Image"
-            width="1920"
-            height="1080"
-            className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-          />
-        </div>
       </form>
     </Form>
   );

@@ -1,0 +1,18 @@
+export const themes: string[] = [
+  'Historical',
+  'Action',
+  'Storytelling',
+  'Educational',
+  'Team Building',
+  'Sports',
+  'Family',
+  'Geocaching',
+  'Urban',
+  'Mission-based',
+  'Scripted',
+  'Survival',
+  'Detective',
+  'RPG',
+  'LARP',
+  'Horror',
+];
