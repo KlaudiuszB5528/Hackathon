@@ -44,4 +44,12 @@ export class GamesService {
       },
     });
   }
+
+  findAllForUser() {
+    return this.prismaService.game.findMany({
+      include: {
+        author: true,
+      },
+    });
+  }
 }
