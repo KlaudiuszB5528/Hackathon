@@ -59,7 +59,6 @@ export const createPdf = async ({
     return;
   }
   const gameDetails = JSON.parse(newGame.choices[0].message.content);
-  console.log(gameDetails);
 
   // Default export is a4 paper, portrait, using millimeters for units
   const doc = new jsPDF();
@@ -123,4 +122,5 @@ export const createPdf = async ({
   );
 
   doc.save('a4.pdf');
+  return true;
 };

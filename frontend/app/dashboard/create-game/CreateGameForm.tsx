@@ -14,6 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import ThemeSelect from './ThemeSelect';
 import {
   formSchema,
@@ -34,15 +35,23 @@ export default function CreateGameForm() {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(() => {
+        onSubmit={form.handleSubmit(async () => {
           setIsLoading(true);
-          createPdf({
-            city: form.getValues().city,
-            participants: form.getValues().participants,
-            points: form.getValues().points,
-            theme: form.getValues().theme,
-          });
-          setIsLoading(false);
+          try {
+            const res = await createPdf({
+              city: form.getValues('city'),
+              participants: form.getValues('participants'),
+              points: form.getValues('points'),
+              theme: form.getValues('theme'),
+            });
+            if (res) {
+              toast.success('PDF created successfully');
+            }
+          } catch (error) {
+            toast.error('Failed to create PDF');
+          } finally {
+            setIsLoading(false);
+          }
         })}
         className="w-full"
       >
@@ -117,7 +126,7 @@ export default function CreateGameForm() {
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <Button className="bg-fuchsia-700 hover:bg-fuchsia-800">
+                  <Button className="bg-fuchsia-700 hover:bg-fuchsia-800 w-32">
                     {isLoading ? (
                       <Loader className="animate-spin" />
                     ) : (
