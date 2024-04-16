@@ -32,11 +32,12 @@ import { toast } from 'sonner';
 const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const { userData } = useContext(AuthContext) as IAuthContext;
 
   return (
     <header className="flex sticky top-0 z-30 h-14 items-center gap-4 border-b bg-background px-4 py-2 sm:static sm:h-auto sm:px-6">
       <h1 className="hidden sm:flex pl-12 text-lg font-extrabold uppercase text-fuchsia-700">
-        Hackathonify
+        FieldGameZone
       </h1>
       <Sheet>
         <SheetTrigger asChild>
@@ -54,7 +55,7 @@ const Header = () => {
                 className="h-6 w-6 transition-all"
               />
               <span className="text-lg font-extrabold uppercase text-fuchsia-700 cursor-default">
-                Hackathonify
+                FieldGameZone
               </span>
             </span>
             <Link
@@ -66,38 +67,7 @@ const Header = () => {
               <Home className="h-5 w-5" />
               Dashboard
             </Link>
-            <Link
-              href="/dashboard/files"
-              className={`text-muted-foreground flex items-center gap-4 px-2.5 hover:text-foreground ${
-                pathname == '/dashboard/files' && 'text-primary'
-              } `}
-            >
-              <Package className="h-5 w-5" />
-              Files
-            </Link>
-            <Link
-              href="/dashboard/members"
-              className={`text-muted-foreground flex items-center gap-4 px-2.5 hover:text-foreground ${
-                pathname == '/dashboard/members' && 'text-primary'
-              } `}
-            >
-              <Users2 className="h-5 w-5" />
-              Members
-            </Link>
-            <Link
-              href="/applications"
-              className={`text-muted-foreground flex items-center gap-4 px-2.5 hover:text-foreground`}
-            >
-              <ListChecks className="h-5 w-5" />
-              Applications
-            </Link>
-            <Link
-              href="/dashboard/settings"
-              className={`text-muted-foreground flex items-center gap-4 px-2.5 hover:text-foreground`}
-            >
-              <Settings className="h-5 w-5" />
-              Settings
-            </Link>
+
             <button
               onClick={() => {
                 deleteCookie('token');
@@ -120,11 +90,11 @@ const Header = () => {
             size="icon"
             className="overflow-hidden rounded-full ml-auto bg-fuchsia-700 text-white text-2xl font-semibold"
           >
-            A
+            {userData?.username?.charAt(0).toUpperCase() || 'U'}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>User</DropdownMenuLabel>
+          <DropdownMenuLabel>{userData?.username}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
             <Link className="cursor-pointer" href="/dashboard/settings">

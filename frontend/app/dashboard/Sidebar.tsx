@@ -38,7 +38,7 @@ const Sidebar = () => {
             alt="logo decorative element"
             className="h-12 w-12 transition-all"
           />
-          <span className="sr-only">Hackathonify</span>
+          <span className="sr-only">FieldGamezone</span>
         </span>
       </div>
       <TooltipProvider>
@@ -57,46 +57,7 @@ const Sidebar = () => {
             </TooltipTrigger>
             <TooltipContent side="right">Dashboard</TooltipContent>
           </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/dashboard/files"
-                className={`${
-                  pathname == '/dashboard/files' && 'bg-accent text-primary'
-                } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
-              >
-                <Package className="h-5 w-5" />
-                <span className="sr-only">Files</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Files</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/dashboard/members"
-                className={`${
-                  pathname == '/dashboard/members' && 'bg-accent text-primary'
-                } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
-              >
-                <Users2 className="h-5 w-5" />
-                <span className="sr-only">Members</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Members</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/applications"
-                className={`flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
-              >
-                <ListChecks className="h-5 w-5" />
-                <span className="sr-only">Applications</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Applications</TooltipContent>
-          </Tooltip>
+
           <Tooltip>
             <TooltipTrigger asChild>
               <button
