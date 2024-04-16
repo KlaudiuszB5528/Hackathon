@@ -18,11 +18,14 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiTags,
+  OmitType,
 } from '@nestjs/swagger';
 import { GameEntity } from './entities/game.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Roles } from '../shared/decorators/roles.decorator';
 import { Role } from '../users/enums/roles';
+import { from, map } from 'rxjs';
+import { UserEntity } from '../users/entities/user.entity';
 
 @Controller('games')
 @ApiTags('games')
@@ -34,7 +37,7 @@ export class GamesController {
   @ApiBearerAuth()
   @Roles([Role.MASTER_USER])
   @ApiCreatedResponse({
-    type: GameEntity,
+    type: OmitType(GameEntity, ['author']),
     description: 'The game has been successfully created.',
   })
   @ApiOperation({ summary: 'Create new game' })
@@ -46,7 +49,8 @@ export class GamesController {
   @UseGuards(JwtAuthGuard)
   @Roles([Role.MASTER_USER])
   @ApiOkResponse({
-    type: [GameEntity],
+    type: OmitType(GameEntity, ['author']),
+    isArray: true,
     description: 'Get a games by game master ID',
   })
   @ApiBearerAuth()
@@ -65,14 +69,21 @@ export class GamesController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get all games' })
   findAllForUser() {
-    return this.gamesService.findAllForUser();
+    return from(this.gamesService.findAllForUser()).pipe(
+      map((games) => {
+        games.map((game) => {
+          game.author = new UserEntity(game.author);
+        });
+        return games;
+      }),
+    );
   }
 
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   @Roles([Role.MASTER_USER])
   @ApiOkResponse({
-    type: [GameEntity],
+    type: OmitType(GameEntity, ['author']),
     description: 'Get a game by ID',
   })
   @ApiBearerAuth()
@@ -85,7 +96,7 @@ export class GamesController {
   @UseGuards(JwtAuthGuard)
   @Roles([Role.MASTER_USER])
   @ApiCreatedResponse({
-    type: GameEntity,
+    type: OmitType(GameEntity, ['author']),
     description: 'The record has been successfully updated.',
   })
   @ApiOperation({ summary: 'Update game by ID' })
@@ -101,7 +112,7 @@ export class GamesController {
   @UseGuards(JwtAuthGuard)
   @Roles([Role.MASTER_USER])
   @ApiOkResponse({
-    type: GameEntity,
+    type: OmitType(GameEntity, ['author']),
     description: 'The record has been deleted',
   })
   @ApiOperation({ summary: 'Delete game' })
