@@ -56,6 +56,7 @@ export default function ThemeSelect() {
                   onSelect={() => {
                     setSelectedTheme(item);
                     setValue('theme', item);
+                    setOpen(false);
                   }}
                 >
                   {item}
