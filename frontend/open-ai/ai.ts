@@ -1,6 +1,9 @@
 import OpenAI from 'openai';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({
+  apiKey: 'sk-proj-DUo5Ac1gsJQo5QgMjBz2T3BlbkFJquymB0AZg2IdpDBgijfC',
+  dangerouslyAllowBrowser: true,
+});
 
 export interface Game {
   city: string;

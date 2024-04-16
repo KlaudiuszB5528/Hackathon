@@ -18,7 +18,7 @@ const Dashboard = () => {
       <CreatePdfButton
         city="Kielce"
         theme="Historyczne"
-        players={16}
+        participants={16}
         description={loremIpsum}
       />
     </div>

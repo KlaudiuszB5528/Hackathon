@@ -84,6 +84,7 @@ export const AuthContextProvider = ({
     <AuthContext.Provider
       value={{
         loading,
+        setLoading,
         userId,
         role,
         userData,
