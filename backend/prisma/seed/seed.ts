@@ -34,9 +34,9 @@ async function main() {
     data: {
       title: 'Game 1',
       authorId: 2,
-      description: 'Description of Game 1',
+      gameRules: 'Description of Game 1',
       city: 'City 1',
-      slots: 5,
+      participants: 5,
       promptResponse: 'Prompt Response 1',
       theme: 'Theme 1',
     },

@@ -16,10 +16,10 @@ export class GameEntity implements Game {
   city: string;
 
   @ApiProperty()
-  description: string;
+  gameRules: string;
 
   @ApiProperty()
-  slots: number;
+  participants: number;
 
   @ApiProperty()
   title: string;
