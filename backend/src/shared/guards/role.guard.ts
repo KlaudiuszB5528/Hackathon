@@ -1,6 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Roles } from '../decorators/roles.decorator';
+import { TokenUtil } from '../utils/token.util';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -12,12 +13,13 @@ export class RolesGuard implements CanActivate {
       return true;
     }
     const request = context.switchToHttp().getRequest();
-    const user = request.user;
-    return this.matchRoles(roles, user.roles);
+    const user = TokenUtil.parseBearerToken(request);
+    console.log(user);
+    return this.matchRoles(roles, user.role);
   }
 
-  private matchRoles(routeRoles: string[], userRoles: string[]): boolean {
-    console.log(routeRoles, userRoles);
-    return routeRoles.some((role) => userRoles.includes(role));
+  private matchRoles(routeRoles: string[], userRole: string): boolean {
+    console.log(routeRoles, userRole);
+    return routeRoles.some((role) => role === userRole);
   }
 }

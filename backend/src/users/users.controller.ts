@@ -23,6 +23,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { User } from '@prisma/client';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserRoleDto } from './dto/update-user-role.dto';
+import { Roles } from '../shared/decorators/roles.decorator';
+import { Role } from './enums/roles';
 
 @Controller('users')
 @ApiTags('users')
@@ -66,6 +69,24 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return from(this.usersService.update(id, updateUserDto)).pipe(
+      map((user: UserEntity) => new UserEntity(user)),
+    );
+  }
+
+  @Patch('role/:id')
+  @UseGuards(JwtAuthGuard)
+  @Roles([Role.ADMIN])
+  @ApiCreatedResponse({
+    type: UserEntity,
+    description: 'The role has been successfully updated.',
+  })
+  @ApiOperation({ summary: 'Update user role by ID' })
+  @ApiBearerAuth()
+  updateRole(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateUserRoleDto: UpdateUserRoleDto,
+  ) {
+    return from(this.usersService.updateRole(id, updateUserRoleDto)).pipe(
       map((user: UserEntity) => new UserEntity(user)),
     );
   }

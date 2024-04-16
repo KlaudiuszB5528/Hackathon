@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserRoleDto } from './dto/update-user-role.dto';
 
 export const roundsOfHashing = 10;
 
@@ -22,7 +23,6 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    console.log(id);
     return this.prismaService.user.findUnique({ where: { id } });
   }
 
@@ -43,6 +43,13 @@ export class UsersService {
   async remove(id: number) {
     return this.prismaService.user.delete({
       where: { id },
+    });
+  }
+
+  updateRole(id: number, updateUserRoleDto: UpdateUserRoleDto) {
+    return this.prismaService.user.update({
+      where: { id },
+      data: { role: updateUserRoleDto.role },
     });
   }
 }
