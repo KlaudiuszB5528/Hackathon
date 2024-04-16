@@ -1,12 +1,4 @@
-import { generateGame } from '@/open-ai/ai';
 import { jsPDF } from 'jspdf';
-
-type Props = {
-  city: string;
-  theme: string;
-  participants: string;
-  points: string;
-};
 
 function removePolishCharacters(str: string | null): string {
   const polishCharacters: { [key: string]: string } = {
@@ -36,12 +28,7 @@ function removePolishCharacters(str: string | null): string {
   );
 }
 
-export const createPdf = async ({
-  city,
-  theme,
-  participants,
-  points,
-}: Props) => {
+export const createPdf = async (content: string) => {
   let cursorY = 0;
   const pageMarginY = 280;
 
@@ -54,11 +41,7 @@ export const createPdf = async ({
     }
   };
 
-  const newGame = await generateGame({ city, participants, points, theme });
-  if (!newGame.choices[0].message.content) {
-    return;
-  }
-  const gameDetails = JSON.parse(newGame.choices[0].message.content);
+  const gameDetails = JSON.parse(content);
 
   // Default export is a4 paper, portrait, using millimeters for units
   const doc = new jsPDF();
@@ -77,11 +60,11 @@ export const createPdf = async ({
   doc.text('Game Details:', 10, cursorY);
   doc.setFontSize(14);
   incrementCursorY(10);
-  doc.text(`City: ${removePolishCharacters(city)}`, 10, cursorY);
+  doc.text(`City: ${removePolishCharacters(gameDetails.city)}`, 10, cursorY);
   incrementCursorY(10);
-  doc.text(`Game Theme: ${theme}`, 10, cursorY);
+  doc.text(`Game Theme: ${gameDetails.theme}`, 10, cursorY);
   incrementCursorY(10);
-  doc.text(`Number of Participants: ${participants}`, 10, cursorY);
+  doc.text(`Number of Participants: ${gameDetails.participants}`, 10, cursorY);
 
   doc.setFontSize(14);
   incrementCursorY(10);
@@ -109,13 +92,22 @@ export const createPdf = async ({
     incrementCursorY(10);
   }
   gameDetails.points.forEach(
-    (point: { name: string; coordinates: string; puzzles: string[] }) => {
+    (point: {
+      name: string;
+      coordinates: string;
+      puzzles: string[];
+      requiredProps: string[];
+    }) => {
       doc.setFont('Helvetica', 'bold');
       doc.text(`${point.name} ${point.coordinates}`, 10, cursorY);
       incrementCursorY(10);
       doc.setFont('Helvetica', 'normal');
       point.puzzles.forEach((puzzle: string) => {
         doc.text(`Puzzle: ${puzzle}`, 10, cursorY);
+        incrementCursorY(10);
+      });
+      point.requiredProps.forEach((prop: string) => {
+        doc.text(`Required prop: ${prop}`, 10, cursorY);
         incrementCursorY(10);
       });
     },

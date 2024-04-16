@@ -1,6 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { generateGame } from '@/open-ai/ai';
 import {
   Form,
   FormControl,
@@ -22,6 +23,7 @@ import {
 } from './create-game-form.helper';
 import { createPdf } from './generatePdf';
 export default function CreateGameForm() {
+  const [gameDetails, setGameDetails] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<CreateGameFormValues>({
     resolver: zodResolver(formSchema),
@@ -38,14 +40,15 @@ export default function CreateGameForm() {
         onSubmit={form.handleSubmit(async () => {
           setIsLoading(true);
           try {
-            const res = await createPdf({
+            const res = await generateGame({
               city: form.getValues('city'),
               participants: form.getValues('participants'),
               points: form.getValues('points'),
               theme: form.getValues('theme'),
             });
             if (res) {
-              toast.success('PDF created successfully');
+              setGameDetails(res.choices[0].message.content);
+              toast.success('Game generated successfully');
             }
           } catch (error) {
             toast.error('Failed to create PDF');
@@ -132,6 +135,15 @@ export default function CreateGameForm() {
                     ) : (
                       'Create PDF'
                     )}
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      if (gameDetails === null) return;
+                      createPdf(gameDetails);
+                    }}
+                  >
+                    Save to PDF
                   </Button>
                 </div>
               </div>
