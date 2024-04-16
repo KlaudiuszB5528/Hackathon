@@ -1,3 +1,4 @@
 export interface IJWTPayload {
-  teamId: number;
+  userId: number;
+  role: string;
 }

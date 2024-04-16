@@ -1,6 +1,5 @@
 'use client';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@components/ui/button';
 import {
   Form,
@@ -40,6 +39,7 @@ export default function SignUpForm() {
             form.getValues('name'),
             form.getValues('password'),
           );
+
           if (res) router.push('/dashboard');
         })}
         className="w-full lg:grid lg:grid-cols-2"

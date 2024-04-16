@@ -30,7 +30,6 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { toast } from 'sonner';
 
 const Header = () => {
-  const { teamData } = useContext(AuthContext) as IAuthContext;
   const pathname = usePathname();
   const router = useRouter();
 
@@ -121,11 +120,11 @@ const Header = () => {
             size="icon"
             className="overflow-hidden rounded-full ml-auto bg-fuchsia-700 text-white text-2xl font-semibold"
           >
-            {teamData?.name?.charAt(0).toUpperCase()}
+            A
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Team {teamData?.name}</DropdownMenuLabel>
+          <DropdownMenuLabel>User</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
             <Link className="cursor-pointer" href="/dashboard/settings">

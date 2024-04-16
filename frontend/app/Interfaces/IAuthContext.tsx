@@ -1,16 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
-import { ITeamData } from './ITeamData';
-import { ITeamFile } from './ITeamFile';
-import { ITeamMember } from './ITeamMember';
+import { IUser } from './IUser';
 
 export interface IAuthContext {
-  setShouldUpdate: Dispatch<SetStateAction<boolean>>;
-  teamData: ITeamData | null;
-  setTeamData: (teamData: ITeamData | null) => void;
-  teamDataLoading: boolean;
-  setTeamDataLoading: (loading: boolean) => void;
-  teamMembers: ITeamMember[] | null;
-  setTeamMembers: (teamMembers: ITeamMember[] | null) => void;
-  teamFiles: ITeamFile[] | null;
-  setTeamFiles: (teamFiles: ITeamFile[] | null) => void;
+  userData: IUser | null;
+  loading: boolean;
+  userId: number | null;
+  role: string | null;
 }
