@@ -86,7 +86,9 @@ const GameCard = ({
         </CardContent>
         <CardFooter className="mt-auto">
           <GenerateGamePdf
+            gameId={gameId}
             city={city}
+            promptResponse={promptResponse}
             gameRules={gameRules}
             participants={participants}
             theme={theme}

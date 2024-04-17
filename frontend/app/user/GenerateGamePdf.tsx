@@ -1,4 +1,10 @@
 import { Button } from '@/components/ui/button';
+import * as htmlToImage from 'html-to-image';
+import { LatLng } from 'leaflet';
+import 'leaflet-defaulticon-compatibility';
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import jsPDF from 'jspdf';
 import React from 'react';
 
@@ -34,11 +40,32 @@ type Props = {
   city: string;
   gameRules: string;
   participants: number;
+  promptResponse: string;
   theme: string;
+  gameId: string;
 };
 
-const GenerateGamePdf = ({ city, gameRules, participants, theme }: Props) => {
-  const generatePdf = () => {
+const GenerateGamePdf = ({
+  city,
+  gameId,
+  gameRules,
+  participants,
+  promptResponse,
+}: Props) => {
+  let jsonResponse = JSON.parse(promptResponse);
+  let points = jsonResponse.points.map((point: any) => {
+    return {
+      name: point.name,
+      coordinates: point.coordinates.split(',').map((coord: string) => {
+        return parseFloat(coord);
+      }),
+    };
+  });
+
+  console.log(points);
+
+  const generatePdf = async () => {
+    console.log(points);
     let cursorY = 0;
     const pageMarginY = 280;
 
@@ -87,13 +114,69 @@ const GenerateGamePdf = ({ city, gameRules, participants, theme }: Props) => {
       }).h + 10,
     );
 
+    // Generate map
+    const generatedImage = await generateImage();
+    if (generatedImage) {
+      const canvas = document.createElement('canvas');
+      canvas.width = generatedImage.width;
+      canvas.height = generatedImage.height;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(generatedImage, 0, 0);
+        const dataUrl = canvas.toDataURL('image/png');
+        doc.addPage();
+        doc.setFont('Helvetica', 'bold');
+        doc.setFontSize(16);
+        doc.text('Starting point', 10, 20);
+        doc.addImage(dataUrl, 'PNG', 10, 30, 180, 120);
+      }
+    }
+
     doc.save('game.pdf');
+  };
+  if (!points) {
+    return <div>loading...</div>;
+  }
+
+  const generateImage = () => {
+    const node = document.getElementById(`map${gameId}`);
+    if (!node) return;
+
+    return htmlToImage
+      .toPng(node)
+      .then((dataUrl) => {
+        const img = new Image();
+        img.src = dataUrl;
+        return img;
+      })
+      .catch((error) => {
+        console.error('oops, something went wrong!', error);
+      });
   };
 
   return (
-    <Button onClick={generatePdf} className="bg-fuchsia-700">
-      Generate PDF
-    </Button>
+    <div className="flex flex-col w-full">
+      <MapContainer
+        id={`map${gameId}`}
+        className="w-full h-[200px]"
+        zoom={13}
+        scrollWheelZoom={false}
+        center={points[0].coordinates as LatLng}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+
+        <Marker
+          position={points[0].coordinates as LatLng}
+          key={points[0].coordinates.toString()}
+        />
+      </MapContainer>
+      <Button onClick={generatePdf} className="bg-fuchsia-700">
+        Generate PDF
+      </Button>
+    </div>
   );
 };
 
