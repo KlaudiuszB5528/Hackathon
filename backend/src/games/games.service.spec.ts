@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { GamesService } from './games.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateGameDto } from './dto/create-game.dto';
+import { GameEntity } from './entities/game.entity';
 
 jest.mock('../prisma/prisma.service', () => ({
   PrismaService: jest.fn().mockImplementation(() => ({
@@ -38,13 +39,13 @@ describe('GamesService', () => {
 
   it('finds a game by ID', async () => {
     const id = 1;
-    const game = {
+    const game: Omit<GameEntity, 'author'> = {
       id,
       authorId: 1,
       city: 'city',
-      description: 'description',
+      gameRules: 'description',
       title: 'title',
-      slots: 1,
+      participants: 1,
       promptResponse: 'promptResponse',
       theme: 'theme',
     };
@@ -55,13 +56,13 @@ describe('GamesService', () => {
 
   it('updates a game', async () => {
     const id = 1;
-    const game = {
+    const game: Omit<GameEntity, 'author'> = {
       id,
       authorId: 1,
       city: 'city',
-      description: 'description',
+      gameRules: 'description',
       title: 'title',
-      slots: 1,
+      participants: 1,
       promptResponse: 'promptResponse',
       theme: 'theme',
     };
@@ -72,13 +73,13 @@ describe('GamesService', () => {
 
   it('deletes a game', async () => {
     const id = 1;
-    const game = {
+    const game: Omit<GameEntity, 'author'> = {
       id,
       authorId: 1,
       city: 'city',
-      description: 'description',
+      gameRules: 'description',
       title: 'title',
-      slots: 1,
+      participants: 1,
       promptResponse: 'promptResponse',
       theme: 'theme',
     };
@@ -89,13 +90,13 @@ describe('GamesService', () => {
 
   it('finds all games for a game master', async () => {
     const id = 1;
-    const game = {
+    const game: Omit<GameEntity, 'author'> = {
       promptResponse: 'promptResponse',
       theme: 'theme',
       authorId: id,
-      description: 'description',
+      gameRules: 'description',
       city: 'city',
-      slots: 1,
+      participants: 1,
       title: 'title',
       id: 1,
     };

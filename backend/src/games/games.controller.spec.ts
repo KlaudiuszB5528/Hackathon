@@ -24,8 +24,8 @@ describe('GamesController', () => {
   it('creates a game', async () => {
     const dto: CreateGameDto = {
       city: 'city',
-      description: 'description',
-      slots: 1,
+      gameRules: 'description',
+      participants: 1,
       title: 'title',
       authorId: 1,
       promptResponse: 'promptResponse',

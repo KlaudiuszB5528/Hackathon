@@ -20,9 +20,9 @@ model Game {
   authorId       Int
   author         User   @relation(fields: [authorId], references: [id])
   city           String
-  description    String
+  gameRules      String
   title          String
-  slots          Int
+  participants   Int
   promptResponse String
   theme          String
 }

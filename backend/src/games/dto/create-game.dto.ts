@@ -10,11 +10,11 @@ export class CreateGameDto {
   @Max(16)
   @IsNotEmpty()
   @ApiProperty()
-  slots: number;
+  participants: number;
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  description: string;
+  gameRules: string;
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
