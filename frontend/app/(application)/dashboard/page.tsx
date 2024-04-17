@@ -1,10 +1,10 @@
 'use client';
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import { IAuthContext } from '../Interfaces/IAuthContext';
-import { getCookie, deleteCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
+import { useContext, useEffect, useState } from 'react';
+import { IAuthContext } from '../../Interfaces/IAuthContext';
+import { IGameDetails } from '../../Interfaces/IGameDetails';
+import { AuthContext } from '../../context/AuthContext';
 import GameCard from './GameCard';
-import { IGameDetails } from '../Interfaces/IGameDetails';
 
 const Dashboard = () => {
   const { userId, loading, setLoading } = useContext(

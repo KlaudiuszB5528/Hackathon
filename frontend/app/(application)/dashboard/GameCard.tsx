@@ -13,11 +13,11 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
+import { IGameDetails } from '@/app/Interfaces/IGameDetails';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import { BarChartBig, FileDigit, Star, WholeWord } from 'lucide-react';
 import GenerateGamePdf from './GenerateGamePdf';
-import { IGameDetails } from '@/app/Interfaces/IGameDetails';
 
 const GameCard = ({
   gameId,

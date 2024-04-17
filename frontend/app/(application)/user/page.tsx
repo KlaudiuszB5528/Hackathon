@@ -1,9 +1,9 @@
 'use client';
 import { deleteCookie, getCookie } from 'cookies-next';
 import { useContext, useEffect, useState } from 'react';
-import { IAuthContext } from '../Interfaces/IAuthContext';
-import { IGameDetails } from '../Interfaces/IGameDetails';
-import { AuthContext } from '../context/AuthContext';
+import { IAuthContext } from '../../Interfaces/IAuthContext';
+import { IGameDetails } from '../../Interfaces/IGameDetails';
+import { AuthContext } from '../../context/AuthContext';
 import GameCard from './GameCard';
 
 const User = () => {
