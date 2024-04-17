@@ -54,35 +54,39 @@ const Sidebar = () => {
               <TooltipContent side="right">Admin Dashboard</TooltipContent>
             </Tooltip>
           )}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/dashboard"
-                className={`${
-                  pathname == '/dashboard' && 'bg-accent text-primary'
-                } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
-              >
-                <Home className="h-5 w-5" />
-                <span className="sr-only">Dashboard</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Dashboard</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/dashboard/create-game"
-                className={`${
-                  pathname == '/dashboard/create-game' &&
-                  'bg-accent text-primary'
-                } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
-              >
-                <Plus className="h-5 w-5" />
-                <span className="sr-only">Create game</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Create game</TooltipContent>
-          </Tooltip>
+          {userData?.role !== 'admin' && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/dashboard"
+                  className={`${
+                    pathname == '/dashboard' && 'bg-accent text-primary'
+                  } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
+                >
+                  <Home className="h-5 w-5" />
+                  <span className="sr-only">Dashboard</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Dashboard</TooltipContent>
+            </Tooltip>
+          )}
+          {userData?.role === 'masterUser' && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/dashboard/create-game"
+                  className={`${
+                    pathname == '/dashboard/create-game' &&
+                    'bg-accent text-primary'
+                  } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
+                >
+                  <Plus className="h-5 w-5" />
+                  <span className="sr-only">Create game</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Create game</TooltipContent>
+            </Tooltip>
+          )}
 
           <Tooltip>
             <TooltipTrigger asChild>

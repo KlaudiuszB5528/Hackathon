@@ -25,14 +25,17 @@ export const RoleSelect = ({
   const handleUpdate = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/users/${userId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getCookie('token')}`,
+      const response = await fetch(
+        `http://localhost:8000/users/role/${userId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${getCookie('token')}`,
+          },
+          body: JSON.stringify({ role }),
         },
-        body: JSON.stringify({ role }),
-      });
+      );
       if (response.status === 200) {
         toast.success('Role updated');
         setShouldUpdate(true);
@@ -44,7 +47,7 @@ export const RoleSelect = ({
     }
   };
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-4 items-center">
       <Select
         defaultValue={userRole}
         onValueChange={(value: string) => {
