@@ -2,7 +2,15 @@
 import { Button } from '@/components/ui/button';
 import Logo from '@/public/Logo.svg';
 import { deleteCookie } from 'cookies-next';
-import { Home, LogOut, PanelLeft } from 'lucide-react';
+import {
+  Home,
+  ListChecks,
+  LogOut,
+  Package,
+  PanelLeft,
+  Settings,
+  Users2,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -50,15 +58,6 @@ const Header = () => {
                 FieldGameZone
               </span>
             </span>
-            <Link
-              href="/dashboard"
-              className={`text-muted-foreground flex items-center gap-4 px-2.5 hover:text-foreground ${
-                pathname == '/dashboard' && 'text-primary'
-              } `}
-            >
-              <Home className="h-5 w-5" />
-              Dashboard
-            </Link>
 
             <button
               onClick={() => {

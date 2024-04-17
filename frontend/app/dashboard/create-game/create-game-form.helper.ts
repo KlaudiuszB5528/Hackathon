@@ -14,15 +14,15 @@ export type CreateGameFormValues = z.infer<typeof formSchema>;
 export const generateImage = () => {
   const node = document.getElementById('map');
   if (!node) return;
-  htmlToImage
+
+  return htmlToImage
     .toPng(node)
     .then((dataUrl) => {
       const img = new Image();
       img.src = dataUrl;
-      console.log(img);
-      document.body.appendChild(img);
+      return img;
     })
     .catch((error) => {
       console.error('oops, something went wrong!', error);
     });
-};
+}
