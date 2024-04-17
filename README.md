@@ -27,3 +27,13 @@
 - Klaudiusz Biegacz - klaudiusz.biegacz@gmail.com
 - Marek Dzwonnik - mardzw7@gmail.com
 - Krzysztof Pańtak - krzysztofpantak@gmail.com
+
+
+## Działanie aplikacji
+- Domyślnie generowani są 3 użytkownicy:
+    - login: `admin`, hasło: `Test123$`
+    - login: `masteruser`, hasło: `Test123$`
+    - login: `user`, hasło: `Test123$`
+- Admin ma dostęp do dashboardu, gdzie może usuwać oraz zmieniać role użytkownikom
+- Masteruser ma dostęp do dashboardu, gdzie może wyświetlać wszystkie swoje utworzone gry oraz dodawać nowe
+- User ma dostęp do dashboardu, gdzie może wyświetlać wszystkie gry utworzone przez masterusera
