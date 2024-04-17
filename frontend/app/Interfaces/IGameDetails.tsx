@@ -1,6 +1,10 @@
-interface gameDetails {
+export interface IGameDetails {
+  gameId: string;
+  author: string;
   city: string;
-  theme: string;
+  gameRules: string;
   participants: number;
-  description: string;
+  promptResponse: string;
+  theme: string;
+  title: string;
 }

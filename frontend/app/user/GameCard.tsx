@@ -13,11 +13,11 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import { BarChartBig, FileDigit, Star, WholeWord } from 'lucide-react';
-import Link from 'next/link';
+import GenerateGamePdf from './GenerateGamePdf';
+import { IGameDetails } from '@/app/Interfaces/IGameDetails';
 
 const GameCard = ({
   gameId,
@@ -28,7 +28,7 @@ const GameCard = ({
   promptResponse,
   theme,
   title,
-}) => {
+}: IGameDetails) => {
   const { loading } = useContext(AuthContext) as IAuthContext;
   // If loading then show loading spinner
   if (loading) {
@@ -85,9 +85,12 @@ const GameCard = ({
           </ScrollArea>
         </CardContent>
         <CardFooter className="mt-auto">
-          <Button asChild className="bg-fuchsia-700">
-            <Link href="/dashboard/settings">Update Team Information</Link>
-          </Button>
+          <GenerateGamePdf
+            city={city}
+            gameRules={gameRules}
+            participants={participants}
+            theme={theme}
+          />
         </CardFooter>
       </Card>
     </>

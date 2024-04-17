@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { IAuthContext } from '../Interfaces/IAuthContext';
 import { getCookie, deleteCookie } from 'cookies-next';
 import GameCard from './GameCard';
+import { IGameDetails } from '../Interfaces/IGameDetails';
 
 const User = () => {
   const { userId, loading, setLoading } = useContext(
@@ -39,10 +40,10 @@ const User = () => {
   return (
     <div className="w-full h-full p-4 sm:p-10 m-auto space-y-4 lg:grid lg:grid-cols-2 lg:space-y-0 lg:gap-4 xl:grid-cols-3 max-w-screen-2xl">
       {games &&
-        games.map((game) => (
+        games.map((game: IGameDetails) => (
           <GameCard
-            key={game.id}
-            gameId={game.id}
+            key={game.gameId}
+            gameId={game.gameId}
             author={game.author}
             city={game.city}
             gameRules={game.gameRules}
