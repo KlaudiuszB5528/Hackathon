@@ -2,9 +2,9 @@
 
 import { IUser } from '@/app/Interfaces/IUser';
 import { ColumnDef } from '@tanstack/react-table';
-import { Trash2 } from 'lucide-react';
 import { Dispatch, SetStateAction } from 'react';
 import { RoleSelect } from './RoleSelect';
+import CellAction from './cell-action';
 
 export const columns = (
   setShouldUpdate: Dispatch<SetStateAction<boolean>>,
@@ -32,7 +32,9 @@ export const columns = (
     },
     {
       id: 'actions',
-      cell: ({ row }) => <Trash2 />,
+      cell: ({ row }) => (
+        <CellAction setShouldUpdate={setShouldUpdate} id={row.original.id} />
+      ),
     },
   ];
 };
