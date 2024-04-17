@@ -1,4 +1,5 @@
 import { jsPDF } from 'jspdf';
+import { generateImage } from './create-game-form.helper';
 
 function removePolishCharacters(str: string | null): string {
   const polishCharacters: { [key: string]: string } = {
@@ -112,6 +113,22 @@ export const createPdf = async (content: string, gameRules: string) => {
       });
     },
   );
+  incrementCursorY(10);
+  doc.text('Map on next page', 10, cursorY);
+
+  const generatedImage = await generateImage();
+  if (generatedImage) {
+    const canvas = document.createElement('canvas');
+    canvas.width = generatedImage.width;
+    canvas.height = generatedImage.height;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.drawImage(generatedImage, 0, 0);
+      const dataUrl = canvas.toDataURL('image/png');
+      doc.addPage();
+      doc.addImage(dataUrl, 'PNG', 10, 15, 180, 180);
+    }
+  }
 
   doc.save('a4.pdf');
   return true;
