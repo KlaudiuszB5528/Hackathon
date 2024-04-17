@@ -42,9 +42,9 @@ const Sidebar = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="/dashboard/admin"
+                  href="/admin"
                   className={`${
-                    pathname == '/dashboard/admin' && 'bg-accent text-primary'
+                    pathname == '/admin' && 'bg-accent text-primary'
                   } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                 >
                   <Shield className="h-5 w-5" />
