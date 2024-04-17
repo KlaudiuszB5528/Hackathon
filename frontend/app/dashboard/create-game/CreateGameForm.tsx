@@ -23,6 +23,7 @@ import {
   type CreateGameFormValues,
 } from './create-game-form.helper';
 import { createPdf } from './generatePdf';
+import SaveGameButton from './SaveGameButton';
 
 export default function CreateGameForm() {
   const [gameDetails, setGameDetails] = useState<string | null>(null);
@@ -173,6 +174,15 @@ export default function CreateGameForm() {
                   >
                     Save to PDF
                   </Button>
+                  <SaveGameButton
+                    disabled={gameRules === ''}
+                    title="Game"
+                    participants={jsonGameDetails?.participants}
+                    gameRules={gameRules}
+                    city={jsonGameDetails?.city}
+                    promptResponse={jsonGameDetails?.promptResponse}
+                    theme={jsonGameDetails?.theme}
+                  />
                 </div>
               </div>
             </div>
