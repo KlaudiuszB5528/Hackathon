@@ -42,12 +42,12 @@ type Props = {
   participants: number;
   promptResponse: string;
   theme: string;
-  gameId: string;
+  id: string;
 };
 
 const GenerateGamePdf = ({
   city,
-  gameId,
+  id,
   gameRules,
   participants,
   promptResponse,
@@ -172,7 +172,7 @@ const GenerateGamePdf = ({
   }
 
   const generateImage = () => {
-    const node = document.getElementById(`map${gameId}`);
+    const node = document.getElementById(`map${id}`);
     if (!node) return;
 
     return htmlToImage
@@ -190,7 +190,7 @@ const GenerateGamePdf = ({
   return (
     <div className="flex flex-col w-full">
       <MapContainer
-        id={`map${gameId}`}
+        id={`map${id}`}
         className="w-full h-[200px]"
         zoom={13}
         scrollWheelZoom={false}

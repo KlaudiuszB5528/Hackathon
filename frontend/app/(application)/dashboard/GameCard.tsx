@@ -20,7 +20,7 @@ import { BarChartBig, FileDigit, Star, WholeWord } from 'lucide-react';
 import GenerateGamePdf from './GenerateGamePdf';
 
 const GameCard = ({
-  gameId,
+  id,
   author,
   city,
   gameRules,
@@ -70,7 +70,7 @@ const GameCard = ({
             <FileDigit className="h-5 w-5" />
             <p className="font-bold">Game Number </p>
           </div>
-          <p className="pb-3">{gameId}</p>
+          <p className="pb-3">{id}</p>
           <div className="flex items-center gap-2.5">
             <Star className="h-5 w-5" />
             <p className="font-bold">Game Theme</p>
@@ -86,7 +86,7 @@ const GameCard = ({
         </CardContent>
         <CardFooter className="mt-auto">
           <GenerateGamePdf
-            gameId={gameId}
+            id={id}
             city={city}
             promptResponse={promptResponse}
             gameRules={gameRules}

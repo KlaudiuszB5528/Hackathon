@@ -42,8 +42,8 @@ const User = () => {
       {games &&
         games.map((game: IGameDetails) => (
           <GameCard
-            key={game.gameId}
-            gameId={game.gameId}
+            key={game.id}
+            id={game.id}
             author={game.author}
             city={game.city}
             gameRules={game.gameRules}

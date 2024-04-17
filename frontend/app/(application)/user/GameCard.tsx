@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button';
 import { getCookie } from 'cookies-next';
 
 const GameCard = ({
-  gameId,
+  id,
   author,
   city,
   gameRules,
@@ -36,7 +36,7 @@ const GameCard = ({
 
   const deleteGame = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/games/${gameId}`, {
+      const response = await fetch(`http://localhost:8000/games/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${getCookie('token')}`,
@@ -97,7 +97,7 @@ const GameCard = ({
             <FileDigit className="h-5 w-5" />
             <p className="font-bold">Game Number </p>
           </div>
-          <p className="pb-3">{gameId}</p>
+          <p className="pb-3">{id}</p>
           <div className="flex items-center gap-2.5">
             <Star className="h-5 w-5" />
             <p className="font-bold">Game Theme</p>
@@ -113,7 +113,7 @@ const GameCard = ({
         </CardContent>
         <CardFooter className="mt-auto">
           <GenerateGamePdf
-            gameId={gameId}
+            id={id}
             city={city}
             promptResponse={promptResponse}
             gameRules={gameRules}
