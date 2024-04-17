@@ -58,9 +58,12 @@ const Sidebar = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href="/dashboard"
+                  href={`${
+                    userData?.role === 'masterUser' ? '/dashboard' : '/user'
+                  }`}
                   className={`${
-                    pathname == '/dashboard' && 'bg-accent text-primary'
+                    pathname == '/dashboard' ||
+                    (pathname == '/user' && 'bg-accent text-primary')
                   } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                 >
                   <Home className="h-5 w-5" />
