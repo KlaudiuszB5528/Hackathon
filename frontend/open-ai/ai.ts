@@ -22,7 +22,7 @@ export async function generateGame({
     messages: [
       {
         role: 'system',
-        content: `Generate an outdoor game for the city of ${city},first check if the city exists if not return JSON object with message city does not exist, provide complete game rules,the theme of the game is ${theme}, specify ${points} points,their coordinates on the map and the name of the localization,for each point provide a list of puzzles at it,provide A list of required props (numerical locks, puzzles, necessary gadgets. Game should be designed for ${participants} participants. Provide the answer in JSON format. The JSON schema is:{
+        content: `Generate an outdoor game for the city of ${city},first check if the city exists if not return JSON object with message city does not exist, provide complete game rules,the theme of the game is ${theme}, specify ${points} points,their coordinates on the map (in format latitude,longitude only number part) and the name of the localization,for each point provide a list of puzzles at it,provide A list of required props (numerical locks, puzzles, necessary gadgets. Game should be designed for ${participants} participants. Provide the answer in JSON format. The JSON schema is:{
     "city": "...",
     "points": [{
         "name": "...",
