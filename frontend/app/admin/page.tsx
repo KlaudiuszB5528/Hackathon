@@ -11,7 +11,6 @@ const AdminDashboard = () => {
   if (!userData || userData.role !== 'admin') {
     redirect('/dashboard');
   }
-
   return (
     <div className="flex w-full flex-col items-center gap-8">
       <h2 className="mx-auto my-6 font-bold text-2xl">Admin Dashboard</h2>
