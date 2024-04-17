@@ -1,5 +1,8 @@
+import { AuthContext } from '@/app/context/AuthContext';
+import { IAuthContext } from '@/app/Interfaces/IAuthContext';
 import { Button } from '@/components/ui/button';
-import React from 'react';
+import { getCookie } from 'cookies-next';
+import React, { useContext } from 'react';
 
 type Props = {
   disabled: boolean;
@@ -12,11 +15,14 @@ type Props = {
 };
 
 const SaveGameButton = (props: Props) => {
+  const { userId } = useContext(AuthContext) as IAuthContext;
+
   const saveGame = async () => {
     const response = await fetch('http://localhost:8000/games', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${getCookie('token')}`,
       },
       body: JSON.stringify({
         title: props.title,
@@ -25,6 +31,7 @@ const SaveGameButton = (props: Props) => {
         city: props.city,
         promptResponse: props.promptResponse,
         theme: props.theme,
+        authorId: userId,
       }),
     });
 
