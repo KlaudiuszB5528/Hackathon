@@ -11,7 +11,6 @@ const Dashboard = () => {
     AuthContext,
   ) as IAuthContext;
   const [games, setGames] = useState<any>([]);
-  console.log(games);
   useEffect(() => {
     const fetchData = async () => {
       // Fetch data from the backend

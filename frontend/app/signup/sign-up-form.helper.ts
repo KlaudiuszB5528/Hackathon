@@ -1,5 +1,4 @@
 import { login } from '@/app/signin/sign-in-form.helper';
-import { getCookie } from 'cookies-next';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -19,7 +18,6 @@ export const formSchema = z
 export type SignUpCredentials = z.infer<typeof formSchema>;
 
 export const signup = async (name: string, password: string) => {
-  console.log('signup');
   try {
     const res = await fetch('http://localhost:8000/users', {
       method: 'POST',
@@ -36,7 +34,6 @@ export const signup = async (name: string, password: string) => {
       throw new Error(data.message);
     }
     const data = await res.json();
-    console.log(data);
 
     toast.success('New User created successfully');
     const logRes = await login(name, password);

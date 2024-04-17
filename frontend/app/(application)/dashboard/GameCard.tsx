@@ -14,12 +14,13 @@ import {
 } from '@/components/ui/card';
 
 import { IGameDetails } from '@/app/Interfaces/IGameDetails';
+import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
-import { BarChartBig, CircleX, FileDigit, Star, WholeWord } from 'lucide-react';
-import GenerateGamePdf from './GenerateGamePdf';
-import { Button } from '@/components/ui/button';
 import { getCookie } from 'cookies-next';
+import { BarChartBig, CircleX, FileDigit, Star, WholeWord } from 'lucide-react';
+import { toast } from 'sonner';
+import GenerateGamePdf from './GenerateGamePdf';
 
 const GameCard = ({
   id,
@@ -43,7 +44,7 @@ const GameCard = ({
       });
 
       if (response.ok) {
-        console.log('Game deleted');
+        toast.success('Game deleted');
       }
     } catch (error) {
       console.error('Error deleting game', error);

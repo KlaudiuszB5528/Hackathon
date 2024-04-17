@@ -1,12 +1,11 @@
 import { Button } from '@/components/ui/button';
 import * as htmlToImage from 'html-to-image';
+import jsPDF from 'jspdf';
 import { LatLng } from 'leaflet';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import jsPDF from 'jspdf';
-import React from 'react';
 
 function removePolishCharacters(str: string | null): string {
   const polishCharacters: { [key: string]: string } = {
@@ -62,16 +61,11 @@ const GenerateGamePdf = ({
     };
   });
 
-  console.log(points);
-
   const generatePdf = async () => {
-    console.log(points);
     let cursorY = 0;
     const pageMarginY = 280;
-
     const incrementCursorY = (increment: number) => {
       cursorY += increment;
-      console.log(cursorY);
       if (cursorY >= pageMarginY) {
         doc.addPage();
         cursorY = 25;

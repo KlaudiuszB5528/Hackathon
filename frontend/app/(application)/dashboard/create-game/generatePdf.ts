@@ -35,7 +35,6 @@ export const createPdf = async (content: string, gameRules: string) => {
 
   const incrementCursorY = (increment: number) => {
     cursorY += increment;
-    console.log(cursorY);
     if (cursorY >= pageMarginY) {
       doc.addPage();
       cursorY = 25;
