@@ -37,6 +37,6 @@
     - login: `master`, hasło: `Test123$`
     - login: `user`, hasło: `Test123$`
 - Każdy nowy użytkownik ma przypisaną rolę `user`
-- Admin ma dostęp do dashboardu, gdzie może usuwać oraz zmieniać role użytkownikom
-- Masteruser ma dostęp do dashboardu, gdzie może wyświetlać wszystkie swoje utworzone gry oraz dodawać nowe
-- User ma dostęp do dashboardu, gdzie może wyświetlać wszystkie gry utworzone przez masterusera
+- Admin ma dostęp do dashboardu, gdzie może usuwać użytkowników oraz zmieniać role użytkownikom
+- Master ma dostęp do dashboardu, gdzie może wyświetlać wszystkie swoje utworzone gry oraz dodawać nowe
+- User ma dostęp do dashboardu, gdzie może wyświetlać wszystkie gry utworzone przez mastera
