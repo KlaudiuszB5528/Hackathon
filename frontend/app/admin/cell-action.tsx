@@ -1,6 +1,6 @@
 'use client';
 import { getCookie } from 'cookies-next';
-import { Trash2 } from 'lucide-react';
+import { Loader, Trash2 } from 'lucide-react';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -33,7 +33,9 @@ export default function CellAction({
     }
   };
 
-  return (
+  return isLoading ? (
+    <Loader className="animate-spin" />
+  ) : (
     <Trash2
       className="hover:text-red-500 cursor-pointer"
       onClick={handleDelete}
