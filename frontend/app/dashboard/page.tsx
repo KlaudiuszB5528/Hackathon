@@ -6,7 +6,7 @@ import { getCookie, deleteCookie } from 'cookies-next';
 import GameCard from './GameCard';
 import { IGameDetails } from '../Interfaces/IGameDetails';
 
-const User = () => {
+const Dashboard = () => {
   const { userId, loading, setLoading } = useContext(
     AuthContext,
   ) as IAuthContext;
@@ -40,7 +40,6 @@ const User = () => {
     setLoading(false);
   }, [userId, setLoading, setGames]);
 
-const Dashboard = () => {
   return (
     <div className="w-full h-full p-4 sm:p-10 m-auto space-y-4 lg:grid lg:grid-cols-2 lg:space-y-0 lg:gap-4 xl:grid-cols-3 max-w-screen-2xl">
       {games &&
@@ -61,4 +60,4 @@ const Dashboard = () => {
   );
 };
 
-export default User;
+export default Dashboard;
