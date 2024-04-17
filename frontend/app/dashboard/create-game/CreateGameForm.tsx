@@ -211,7 +211,7 @@ export default function CreateGameForm() {
                       participants={jsonGameDetails?.participants}
                       gameRules={gameRules}
                       city={jsonGameDetails?.city}
-                      promptResponse={jsonGameDetails?.promptResponse}
+                      promptResponse={gameDetails || 'Error loading prompt'}
                       theme={jsonGameDetails?.theme}
                     />
                   </div>

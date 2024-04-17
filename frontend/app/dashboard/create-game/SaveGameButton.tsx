@@ -10,8 +10,8 @@ type Props = {
   participants: number;
   gameRules: string;
   city: string;
-  promptResponse: 'string';
-  theme: 'string';
+  promptResponse: string;
+  theme: string;
 };
 
 const SaveGameButton = (props: Props) => {
