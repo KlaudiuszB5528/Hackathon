@@ -32,8 +32,9 @@
 ## Działanie aplikacji
 - Domyślnie generowani są 3 użytkownicy:
     - login: `admin`, hasło: `Test123$`
-    - login: `masteruser`, hasło: `Test123$`
+    - login: `master`, hasło: `Test123$`
     - login: `user`, hasło: `Test123$`
+- Każdy nowy użytkownik ma przypisaną rolę `user`
 - Admin ma dostęp do dashboardu, gdzie może usuwać oraz zmieniać role użytkownikom
 - Masteruser ma dostęp do dashboardu, gdzie może wyświetlać wszystkie swoje utworzone gry oraz dodawać nowe
 - User ma dostęp do dashboardu, gdzie może wyświetlać wszystkie gry utworzone przez masterusera
