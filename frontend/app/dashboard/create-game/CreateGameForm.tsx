@@ -23,13 +23,13 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { toast } from 'sonner';
+import SaveGameButton from './SaveGameButton';
 import ThemeSelect from './ThemeSelect';
 import {
   formSchema,
   type CreateGameFormValues,
 } from './create-game-form.helper';
 import { createPdf } from './generatePdf';
-import SaveGameButton from './SaveGameButton';
 
 export default function CreateGameForm() {
   const [gameDetails, setGameDetails] = useState<string | null>(null);
@@ -173,7 +173,7 @@ export default function CreateGameForm() {
                       placeholder="You can edit game rules after generating the game"
                     />
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 justify-between">
                     <Button
                       disabled={isGenerating}
                       className="bg-fuchsia-700 hover:bg-fuchsia-800 w-32"
@@ -187,10 +187,10 @@ export default function CreateGameForm() {
                     <Button
                       disabled={gameDetails === null || isSaving}
                       type="button"
+                      className="w-32"
                       onClick={async () => {
                         if (gameDetails === null) return;
                         setIsSaving(true);
-
                         try {
                           const res = await createPdf(gameDetails, gameRules);
                           if (res) {
@@ -203,7 +203,11 @@ export default function CreateGameForm() {
                         }
                       }}
                     >
-                      Save to PDF
+                      {isSaving ? (
+                        <Loader className="animate-spin" />
+                      ) : (
+                        'Save to PDF'
+                      )}
                     </Button>
                     <SaveGameButton
                       disabled={gameRules === ''}
