@@ -1,5 +1,5 @@
 export interface IGameDetails {
-  gameId: string;
+  id: string;
   author: string;
   city: string;
   gameRules: string;

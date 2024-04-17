@@ -46,7 +46,7 @@ const Dashboard = () => {
         games.map((game: IGameDetails) => (
           <GameCard
             key={game.gameId}
-            gameId={game.gameId}
+            gameId={game.id}
             author={game.author}
             city={game.city}
             gameRules={game.gameRules}
