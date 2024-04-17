@@ -107,6 +107,7 @@ export class UsersController {
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
+  @Roles([Role.ADMIN])
   @ApiOkResponse({
     type: UserEntity,
     description: 'The record has been deleted',
