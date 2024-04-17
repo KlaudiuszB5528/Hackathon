@@ -18,8 +18,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { BarChartBig, CircleX, FileDigit, Star, WholeWord } from 'lucide-react';
 import GenerateGamePdf from './GenerateGamePdf';
 import { IGameDetails } from '@/app/Interfaces/IGameDetails';
-import { Button } from '@/components/ui/button';
-import { getCookie } from 'cookies-next';
+
 
 const GameCard = ({
   id,
@@ -33,23 +32,6 @@ const GameCard = ({
 }: IGameDetails) => {
   const { loading } = useContext(AuthContext) as IAuthContext;
   // If loading then show loading spinner
-
-  const deleteGame = async () => {
-    try {
-      const response = await fetch(`http://localhost:8000/games/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${getCookie('token')}`,
-        },
-      });
-
-      if (response.ok) {
-        console.log('Game deleted');
-      }
-    } catch (error) {
-      console.error('Error deleting game', error);
-    }
-  };
 
   if (loading) {
     return (
@@ -81,13 +63,6 @@ const GameCard = ({
           <CardTitle className="flex gap-2 items-center">
             <BarChartBig className="h-8 w-8" />
             {title}
-            <Button
-              onClick={deleteGame}
-              size="icon"
-              className="ml-auto text-red-500 bg-white hover:bg-white hover:text-red-900"
-            >
-              <CircleX />
-            </Button>
           </CardTitle>
           <CardDescription>{city}</CardDescription>
         </CardHeader>
