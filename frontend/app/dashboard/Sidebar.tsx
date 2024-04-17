@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
 import Logo from '@/public/Logo.svg';
+import { deleteCookie } from 'cookies-next';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { deleteCookie } from 'cookies-next';
+import { useContext } from 'react';
 
+import { Home, LogOut, Plus, Settings, Shield } from 'lucide-react';
 import Link from 'next/link';
-import { Home, LogOut, Plus, Settings } from 'lucide-react';
 
 import {
   Tooltip,
@@ -16,8 +16,11 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { toast } from 'sonner';
+import { IAuthContext } from '../Interfaces/IAuthContext';
+import { AuthContext } from '../context/AuthContext';
 
 const Sidebar = () => {
+  const { userData } = useContext(AuthContext) as IAuthContext;
   const pathname = usePathname();
   const router = useRouter();
 
@@ -35,6 +38,22 @@ const Sidebar = () => {
       </div>
       <TooltipProvider>
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+          {userData?.role === 'admin' && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/dashboard/admin"
+                  className={`${
+                    pathname == '/dashboard/admin' && 'bg-accent text-primary'
+                  } flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
+                >
+                  <Shield className="h-5 w-5" />
+                  <span className="sr-only">Admin Dashboard</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Admin Dashboard</TooltipContent>
+            </Tooltip>
+          )}
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
