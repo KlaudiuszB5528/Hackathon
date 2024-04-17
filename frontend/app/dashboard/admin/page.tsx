@@ -10,7 +10,6 @@ const AdminDashboard = () => {
   const { userData } = useContext(AuthContext) as IAuthContext;
   if (!userData || userData.role !== 'admin') {
     redirect('/dashboard');
-    return <div>Unauthorized</div>;
   }
 
   return (

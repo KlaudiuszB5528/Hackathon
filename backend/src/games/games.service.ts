@@ -42,6 +42,7 @@ export class GamesService {
       where: {
         authorId: id,
       },
+      orderBy: { id: 'asc' },
     });
   }
 
@@ -50,6 +51,7 @@ export class GamesService {
       include: {
         author: true,
       },
+      orderBy: { id: 'asc' },
     });
   }
 }

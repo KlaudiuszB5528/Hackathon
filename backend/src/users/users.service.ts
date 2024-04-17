@@ -59,6 +59,7 @@ export class UsersService {
   findAllUsers() {
     return this.prismaService.user.findMany({
       where: { NOT: { role: Role.ADMIN } },
+      orderBy: { id: 'asc' },
     });
   }
 }
