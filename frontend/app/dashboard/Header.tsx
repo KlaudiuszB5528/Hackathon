@@ -88,12 +88,6 @@ const Header = () => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{userData?.username}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem asChild>
-            <Link className="cursor-pointer" href="/dashboard/settings">
-              Settings
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
           <DropdownMenuItem>
             <button
               onClick={() => {
